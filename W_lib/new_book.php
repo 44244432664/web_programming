@@ -1,13 +1,3 @@
-<?php
-// $sharedOptions = [
-//     0 => 1,
-//     1 => 2,
-//     2 => 3,
-//     3 => 4,
-//     4 => 5
-// ];
-?>
-
 <?php include('head.php'); ?>
 
 <body>
@@ -19,7 +9,7 @@
 
         <div class="form-group">
             <label for="cover">Cover</label>
-            <input type="file" class="form-control" id="cover" name="cover" required>
+            <input type="file" class="form-control" id="cover" name="cover">
         </div>
 
         <div class="form-group">
@@ -29,7 +19,7 @@
 
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
         </div>
 
         <div class="form-group">
@@ -38,6 +28,13 @@
             </div>
 
             <?php
+                // function add_category() {
+                //     echo "<div class='form-control-inline'>";
+                //     echo "<input class='form-control-input' type='text' placeholder='New Category' onkeyup='new_category(this.value)'>";
+                //     echo "</div>";
+                // }
+
+
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
@@ -61,27 +58,32 @@
                     // echo "<p>Connected to Library successfully</p></br>";
                 }
 
+
+                re_qeuery:
                 $sql = "SELECT * FROM categories";
                 $result = $conn->query($sql);
 
+                echo "div class='form-group' id='categories'>";
                 if ($result->num_rows > 0) {
-                    // echo "<p>Checkbox:</p>";    
-                    echo "<select name='category' multiple id='category' class='form-control'>";
-                    // echo "<div class='form-check'>";
                     while($row = $result->fetch_assoc()) {   
-                        echo "<option value='" . $row['category'] . "'>" . $row['category'] . "</option>";
-                        // echo "<input class='form-check-input' type='checkbox' name='category[]' value='" . $row['category'] . "' id='" . $row['category'] . "'>";
-                        // echo "<label class='form-check-label' for='" . $row['category'] . "'>" . $row['category'] . "</label>";
+                        // echo "<option value=\"" . $row['category'] . "\">" . $row['category'] . "</option>";
+                        echo "<div class='form-check form-check-inline'>";
+                        echo "<input class='form-check-input' type='checkbox' name='". $row['category'] . "value='" . $row['category'] . ">";
+                        echo "<label class='form-check-label' for='" . $row['category'] . "'>" . $row['category'] . "</label>";
+                        echo "</div>";
                     }
-                    echo "<option value='other'>Other</option>";
-                    echo "</select>";
-                    // echo "<input class='form-check-input' type='checkbox' name='category[]' value='other' id='other'>";
-                    // echo "<label class='form-check-label' for='other'>Other</label>";
-                    // echo "</div>";
                 }
                 else {
-                    echo "0 results";
+                    echo "<p>No categories found</p>";
                 }
+                echo "</div>";
+
+                // echo "<div class='form-check form-check-inline' id='new_cat_form'></div>";
+                echo "<div class='form-group' id='new_cat_form'>";
+                echo "<div class='btn btn-primary' onclick='category_form()'>Add Category</div>";
+                echo "</div>";
+
+                $conn->close();
             ?>
         </div>
 
@@ -89,5 +91,8 @@
             <label for="content">Content</label>
             <input type="file" class="form-control" id="content" name="content" required>
         </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </body>

@@ -10,7 +10,12 @@
       <ul class="nav align-items-center col-12 col-md-auto me-md-auto"
       id="nav_group">
       <?php
-      $page = $_GET['page'];
+      if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+      } else {
+        $page = '';
+      }
+      // $page = $_GET['page'];
       if ($page == '') {
         $page = 'home';
       }
@@ -46,7 +51,12 @@
 
       <!-- <div class="col-md-3 text-end"></div> -->
       <?php
-      $page = $_GET['page'];
+      if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+      } else {
+        $page = '';
+      }
+      // $page = $_GET['page'];
       if ($page != 'login' && $page != 'register' && $page != 'profile') {
         if(isset($_SESSION['username'])) {
           echo '<div class="col-md-3 text-end">';
