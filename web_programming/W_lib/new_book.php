@@ -58,12 +58,10 @@
                     // echo "<p>Connected to Library successfully</p></br>";
                 }
 
-
-                re_qeuery:
                 $sql = "SELECT * FROM categories";
                 $result = $conn->query($sql);
 
-                echo "div class='form-group' id='categories'>";
+                echo "<div class='form-group' id='categories'>";
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {   
                         // echo "<option value=\"" . $row['category'] . "\">" . $row['category'] . "</option>";
@@ -72,16 +70,20 @@
                         echo "<label class='form-check-label' for='" . $row['category'] . "'>" . $row['category'] . "</label>";
                         echo "</div>";
                     }
+                    echo "<div class='form-check form-check-inline'>";
+                    echo "<input class='form-check-input' type='checkbox' name='other' value='other'>";
+                    echo "<label class='form-check-label' for='other'>Other</label>";
+                    echo "</div>";
                 }
                 else {
                     echo "<p>No categories found</p>";
                 }
-                echo "</div>";
+                // echo "</div>";
 
-                // echo "<div class='form-check form-check-inline' id='new_cat_form'></div>";
-                echo "<div class='form-group' id='new_cat_form'>";
-                echo "<div class='btn btn-primary' onclick='category_form()'>Add Category</div>";
-                echo "</div>";
+                // // echo "<div class='form-check form-check-inline' id='new_cat_form'></div>";
+                // echo "<div class='form-group' id='new_cat_form'>";
+                // echo "<div class='btn btn-primary' onclick='category_form()'>Add Category</div>";
+                // echo "</div>";
 
                 $conn->close();
             ?>

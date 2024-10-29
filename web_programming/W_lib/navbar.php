@@ -51,22 +51,27 @@
 
       <!-- <div class="col-md-3 text-end"></div> -->
       <?php
+      session_start();
+
       if (isset($_GET['page'])) {
         $page = $_GET['page'];
       } else {
         $page = '';
       }
       // $page = $_GET['page'];
-      if ($page != 'login' && $page != 'register' && $page != 'profile') {
-        if(isset($_SESSION['username'])) {
+      if ($page != 'login' && $page != 'register') {  // && $page != 'profile'
+        if($_SESSION['logged_in'] == true && isset($_SESSION['username'])) {
           echo '<div class="col-md-3 text-end">';
+          // echo '<p>' . $_SESSION['username'] . '</p>';
           echo '<a href="index.php?page=logout" class="btn btn-outline-primary me-2 hover">Logout</a>';
-          echo '<a href="index.php?page=profile" class="btn btn-primary hover">Profile</a>';
+          echo '<a href="index.php?page=profile" class="btn btn-primary hover">' . $_SESSION['username'] . '</a>';
           echo '</div>';
         } else {
           echo '<div class="col-md-3 text-end">';
-          echo '<a href="index.php?page=login" class="btn btn-outline-primary me-2 hover">Login</a>';
-          echo '<a href="index.php?page=register" class="btn btn-primary hover">Register</a>';
+          echo '<a href="index.php?page=login" class="btn btn-outline-primary me-2 hover">' .
+          $_SESSION['logged_in'] . '</a>';
+          echo '<a href="index.php?page=register" class="btn btn-primary hover">' .
+          $_SESSION['username'] . '</a>';
           echo '</div>';
         }
       }

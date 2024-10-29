@@ -167,9 +167,8 @@ if ($conn->query($sql) === TRUE) {
 $sql = "CREATE TABLE if not exists users (
 userID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 userLevel INT(1) NOT NULL DEFAULT 0,
-username VARCHAR(30) NOT NULL UNIQUE,
-password VARCHAR(255) NOT NULL,
-email VARCHAR(50) NOT NULL UNIQUE
+userMail VARCHAR(50) NOT NULL UNIQUE,
+password VARCHAR(255) NOT NULL
 )";
 
 if ($conn->query($sql) === TRUE) {
@@ -358,7 +357,7 @@ if (isset($_GET['auto_add_books'])) {
 
 
 // search for admin account
-$sql = "SELECT * FROM users WHERE username='admin' AND userLevel=1";
+$sql = "SELECT * FROM users WHERE userMail='creatormode@example.com' AND userLevel=1";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -366,8 +365,9 @@ if ($result->num_rows > 0) {
 }
 else{
     // Insert admin account
-    $sql = "INSERT INTO users (userLevel, username, password, email) VALUES
-    (1, 'admin', '$passwordHash', 'creatormode@example.com')";
+    $passwordHash = password_hash('Password123', PASSWORD_DEFAULT);
+    $sql = "INSERT INTO users (userLevel, userMail, password) VALUES
+    (1, 'creatormode@example.com', '$passwordHash')";
     if ($conn->query($sql) === TRUE) {
         // echo "Admin account inserted successfully";
     } else {
@@ -378,11 +378,11 @@ else{
 
 if (isset($_GET['auto_add_users'])) {
     // Insert new user accounts with hashed passwords
-    $passwordHash = password_hash('password123', PASSWORD_DEFAULT);
-    $sql = "INSERT INTO users (username, password, email) VALUES
-        ('user1', '$passwordHash', 'user1@example.com'),
-        ('user2', '$passwordHash', 'user2@example.com'),
-        ('user3', '$passwordHash', 'user3@example.com')";
+    $passwordHash = password_hash('Password123', PASSWORD_DEFAULT);
+    $sql = "INSERT INTO users (userLevel, userMail, password) VALUES
+        (0, 'user1@example.com', '$passwordHash'),
+        (0, 'user2@example.com', '$passwordHash'),
+        (0, 'user3@example.com', '$passwordHash')";
 
     if ($conn->query($sql) === TRUE) {
         // echo "New user accounts inserted successfully";
