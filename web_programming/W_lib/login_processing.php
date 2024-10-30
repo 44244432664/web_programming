@@ -1,5 +1,7 @@
 
 <?php
+session_start();
+
 
 $servername = "localhost";
 $username = "root";
@@ -36,23 +38,26 @@ if (mysqli_num_rows($result) > 0) {
     if (password_verify($password, $row['password'])) {
         $_SESSION['logged_in'] = true;
         $_SESSION['username'] = $username;
+        // $_SESSION['user_id'] = $row['userID'];
 
         $return['logged_in'] = true;
-        $return['msg'] = "<div class='alert alert-success'>Login successful</div>";
+        $return['username'] = $username;
+        $return['msg'] = '<div class="alert alert-success">Login successful</div>';
         // header("Location: index.php");
         // echo "<script>window.location.href='index.php';</script>";
         // exit();
     }
     else {
         $return['logged_in'] = false;
-        $return['msg'] = "<div class='alert alert-danger'>Incorrect username or password</div>";
+        $return['msg'] = '<div class="alert alert-danger">Incorrect username or password</div>';
     }
 }
 else {
     $return['logged_in'] = false;
-    $return['msg'] = "<div class='alert alert-danger'>User does not exist</div>";
+    $return['msg'] = '<div class="alert alert-danger">User does not exist</div>';
 }
-
+// echo $_SESSION['logged_in'];
 echo json_encode($return);
 
-mysqli_close($conn);
+
+// mysqli_close($conn);

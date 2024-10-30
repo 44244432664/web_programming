@@ -7,6 +7,7 @@
         <img src="img/Wanderers_Library.png" alt="Wanderer's Library" width="40" height="40">
         <span class="fs-4">The Wanderer's Library</span>
       </a>
+      <!-- <div> -->
       <ul class="nav align-items-center col-12 col-md-auto me-md-auto"
       id="nav_group">
       <?php
@@ -53,6 +54,8 @@
       <?php
       session_start();
 
+      // echo '<p>SESSION: ' . $_SESSION['logged_in'] . '</p>';
+      
       if (isset($_GET['page'])) {
         $page = $_GET['page'];
       } else {
@@ -60,18 +63,22 @@
       }
       // $page = $_GET['page'];
       if ($page != 'login' && $page != 'register') {  // && $page != 'profile'
-        if($_SESSION['logged_in'] == true && isset($_SESSION['username'])) {
+        // $str = implode("; ", $_SESSION);
+        // echo '<p>SESSION: ' . $_SESSION . '</p>';
+        if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
           echo '<div class="col-md-3 text-end">';
           // echo '<p>' . $_SESSION['username'] . '</p>';
-          echo '<a href="index.php?page=logout" class="btn btn-outline-primary me-2 hover">Logout</a>';
-          echo '<a href="index.php?page=profile" class="btn btn-primary hover">' . $_SESSION['username'] . '</a>';
+          echo '<a href="logout.php" class="btn btn-outline-primary me-2 hover">Logout</a>';
+          echo '<a href="user_profile.php" class="btn btn-primary hover">' . $_SESSION['username'] . '</a>';
           echo '</div>';
         } else {
+          // $_SESSION['logged_in'] = false;
+
           echo '<div class="col-md-3 text-end">';
           echo '<a href="index.php?page=login" class="btn btn-outline-primary me-2 hover">' .
-          $_SESSION['logged_in'] . '</a>';
+          "Login" . '</a>';
           echo '<a href="index.php?page=register" class="btn btn-primary hover">' .
-          $_SESSION['username'] . '</a>';
+          "Register" . '</a>';
           echo '</div>';
         }
       }
@@ -93,6 +100,6 @@
       ?>
         <!-- <a href="index.php?page=login" class="btn btn-outline-primary me-2 hover">Login</a>
         <a href="index.php?page=register" class="btn btn-primary hover">Register</a> -->
-      </div>
+      <!-- </div> -->
     </header>
 </div>

@@ -26,6 +26,7 @@
     onclick="auto_add_books(); this.disabled=true;">
         Auto Add Books
     </button> -->
+    <a href="delete_user.php">Delete User Account</a>
     
 
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

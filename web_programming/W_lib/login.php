@@ -1,12 +1,11 @@
-<?php require_once(__DIR__.'/head.php'); ?>
-
+<?php //session_start(); ?>
 <!-- <div class="d-flex p-2">
 
 </div> -->
 <!-- <body> -->
 
 <div class="d-flex justify-content-center">
-    <form action="" id="login_form" method="post" onsubmit=" event.preventDefault(); validateForm();">
+    <form action="" id="login_form" method="post" onsubmit="event.preventDefault(); validateForm();">
         <div id="login_noti"></div>
         <img src="img/Wanderer_s_Library.png" style="width:50%;" alt="The Wanderer's Library" class="center">
 
@@ -51,7 +50,8 @@
                 document.getElementById("username_noti").textContent = "Username is not in mail format.";
                 // return false;
                 valid = false;
-            }else{
+            }
+            else{
                 valid = true;}
 
             if (password.length < 8 || password.toLowerCase() === password || !numbers.test(password)) {
@@ -60,7 +60,8 @@
                 }
                 // return false;
                 valid = false;
-            }else{
+            }
+            else{
                 valid = true;}
             // if (!validateInput(username, password)) {
             //     tmpUsername = username;
@@ -69,17 +70,23 @@
             // return true;
 
 
+            // window.location.href='index.php?page=home';
+            console.log(valid);
             if(valid){
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         res = this.responseText;
+                        console.log(res);
                         res =JSON.parse(res);
                         // console.log(res);
                         // console.log(typeof res['success']);
                         // console.log(res['success'].length)
                         // console.log(res['success']==true);
-                        document.getElementById("login_noti").innerHTML = res;
+                        // console.log(res);
+                        // console.log(res['logged_in']);
+                        console.log(res['msg']);
+                        // document.getElementById("login_noti").innerHTML = res;
                         if(res['logged_in']) {
                             document.getElementById("login_noti").innerHTML = res['msg'];
                             window.location.href='index.php?page=home';
@@ -89,14 +96,13 @@
                         }
                     }
                 };
-                xmlhttp.open("POST", "login_processing.php", true);
+                xmlhttp.open("POST", "login_processing.php");
                 // xmlhttp.open("GET", "login_processing.php?q="+username+"&p="+password, true);
                 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 var postData = "username=" + username + "&password=" + password;
                 xmlhttp.send(postData);   
 
             }
+
         }
 </script>
-
-<?php require_once(__DIR__.'/footer.php'); ?>
