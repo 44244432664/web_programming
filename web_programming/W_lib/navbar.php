@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <div class="container"></div>
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"> 
       <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto
@@ -10,12 +10,31 @@
       <!-- <div> -->
       <ul class="nav align-items-center col-12 col-md-auto me-md-auto"
       id="nav_group">
+
+      <li class="rounded-pill" id="search_bar">
+        <form action="index.php?search" method="get" class="d-flex">
+          <input type="text" class="form-control me-2" name="search" placeholder="Search" aria-label="Search" onkeyup="showResult(this.value)">
+          <!-- <button type="submit" class="btn btn-outline-primary hover">Search</button> -->
+          <button type="submit" class="btn btn-md me-2 btn-primary">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+      </li>
+
       <?php
       if (isset($_GET['page'])) {
         $page = $_GET['page'];
       } else {
         $page = '';
       }
+
+      if (isset($_GET['p'])) {
+        $p = $_GET['p'];
+      } else {
+        $p = 0;
+      }
+      // echo "<scripts>console.log('page: $p');</Scripts>";
+
       // $page = $_GET['page'];
       if ($page == '') {
         $page = 'home';
@@ -48,11 +67,27 @@
         <!-- <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li> -->
         <!-- <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li> -->
         <!-- <li><a href="#" class="nav-link px-2 link-dark">About</a></li> -->
+
+
+      <?php
+      if($page == 'map') {
+        echo '<li class="rounded-pill hover active" id="gg_map"><a href="index.php?page=map" 
+        class="nav-link px-2 link-light">';
+      } else {
+        echo '<li class="rounded-pill hover" id="gg_map"><a href="index.php?page=map" 
+        class="nav-link px-2 link-light">';
+      }
+      ?>
+      MAP
+      </a></li>
       </ul>
 
       <!-- <div class="col-md-3 text-end"></div> -->
       <?php
-      session_start();
+      // if (!isset($_SESSION)) {
+      //   session_start();
+      // }
+      // session_start();
 
       // echo '<p>SESSION: ' . $_SESSION['logged_in'] . '</p>';
       

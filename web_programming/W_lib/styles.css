@@ -11,6 +11,7 @@ body {
 .active {
     background-color: #00C09A;
     /* border-radius: 15px; */
+    color: white;
 }
 
 .center {
@@ -34,6 +35,10 @@ body {
     border-color: #00A281 !important;
 }
 
+.primary-text {
+    color: #00A281 !important;
+}
+
 .btn-outline-primary {
     /* color: white !important; */
     background-color: transparent;
@@ -45,4 +50,22 @@ body {
     /* color: #fff !important; */
     background-color: #00A281 !important;
     border-color: #00A281 !important;
+}
+
+
+.page-link {
+    color: #00A281 !important;
+}
+
+.page-item.active .page-item {
+    z-index: 3;
+    color: #fff !important;
+    background-color: #00A281 !important;
+    border-color: #00A281 !important;
+}
+
+#map {
+    height: 400px;   /* Height of the map */
+    width: 600px;    /* Width of the map, creating a rectangular shape */
+    margin: 0 auto;  /* Center the map on the page */
 }
