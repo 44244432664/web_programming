@@ -20,6 +20,10 @@
             include(__DIR__.'/map.php');
         } else if($page == 'locator') {
             include(__DIR__.'/locator.php');
+        } else if($page == 'book') {
+            include(__DIR__.'/book.php');
+            // $bookID = $_GET['bookID'];
+            // echo "<script>console.log('" . $page . ", " . $bookID . "');</script>";
         } else {
             include(__DIR__.'/home.php');
         }

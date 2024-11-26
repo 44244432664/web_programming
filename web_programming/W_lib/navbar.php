@@ -1,17 +1,16 @@
 <?php session_start(); ?>
-<div class="container"></div>
+<!-- <div class="container"></div> -->
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"> 
+      <div class="me-2">
       <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto
       text-light text-decoration-none">
         <!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> -->
         <img src="img/Wanderers_Library.png" alt="Wanderer's Library" width="40" height="40">
         <span class="fs-4">The Wanderer's Library</span>
       </a>
-      <!-- <div> -->
-      <ul class="nav align-items-center col-12 col-md-auto me-md-auto"
-      id="nav_group">
-
-      <li class="rounded-pill" id="search_bar">
+      </div>
+      <!-- <div class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0"> -->
+      <div class="rounded-pill" id="search_bar">
         <form action="index.php?search" method="get" class="d-flex">
           <input type="text" class="form-control me-2" name="search" placeholder="Search" aria-label="Search" onkeyup="showResult(this.value)">
           <!-- <button type="submit" class="btn btn-outline-primary hover">Search</button> -->
@@ -19,8 +18,34 @@
             <i class="fa fa-search"></i>
           </button>
         </form>
-      </li>
+        <div id="livesearch_result"></div>
+      </div>
+      <!-- </ul> -->
 
+    <script type="text/javascript">
+      function showResult(str) {
+        console.log(str);
+        if (str.length==0) {
+          document.getElementById("livesearch_result").innerHTML="";
+          document.getElementById("livesearch_result").style.border="0px";
+          return;
+        }
+        document.getElementById("livesearch_result").style.display = "block";
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+          if (this.readyState==4 && this.status==200) {
+            document.getElementById("livesearch_result").innerHTML=this.responseText;
+            document.getElementById("livesearch_result").style.border="1px solid #A5ACB2";
+          }
+        }
+        xmlhttp.open("GET","livesearch.php?q="+str,true);
+        xmlhttp.send();
+      }
+    </script>
+
+    <div>
+    <ul class="nav align-items-center col-12 col-md-auto me-md-auto"
+      id="nav_group">
       <?php
       if (isset($_GET['page'])) {
         $page = $_GET['page'];
@@ -78,9 +103,10 @@
         class="nav-link px-2 link-light">';
       }
       ?>
-      MAP
+      Contact
       </a></li>
       </ul>
+      </div>
 
       <!-- <div class="col-md-3 text-end"></div> -->
       <?php
@@ -137,4 +163,4 @@
         <a href="index.php?page=register" class="btn btn-primary hover">Register</a> -->
       <!-- </div> -->
     </header>
-</div>
+<!-- </div> -->

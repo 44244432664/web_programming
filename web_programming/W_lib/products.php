@@ -53,6 +53,7 @@ $sql = "SELECT * FROM books LIMIT $start_limit, $results_per_page";
 $result = $conn->query($sql);
 $count = 0;
 
+$bookprice = 10.00;
 if ($result->num_rows > 0) {
     // echo '<div class="d-flex justify-content-center">';
    
@@ -60,12 +61,13 @@ if ($result->num_rows > 0) {
             if ($count == 0 || $count == 3){
                 echo '<div class="d-flex justify-content-center m-2"">';
             }
-            echo '<div class="card m-1 w-30 bg-dark" style="width: 15rem; height: 30rem">';
-            echo '<img src="' . $row['img'] . '" class="card-img-top" style="max-width: 15rem; max-height: 30rem;" alt="...">';
+            echo '<div class="card m-1 w-30 bg-dark" style="width: 15rem; height: 35rem">';
+            echo '<img src="' . $row['img'] . '" class="card-img-top" style="max-width: 15rem; max-height: 35rem;" alt="...">';
             echo '<div class="card-body">';
             echo '<h5 class="card-title-bottom">' . $row['bookName'] . '</h5>';
             // echo '<p class="card-text">' . $row['author'] . '</p>';
             echo '<a href="#" class="btn btn-primary">Read</a>';
+            echo '<p class="card-text">Price: $' . $bookprice . '</p>';
             echo '</div>';
             echo '</div>';
             $count++;
@@ -83,13 +85,13 @@ if ($result->num_rows > 0) {
     echo '<div class="d-flex justify-content-center">';
     echo '<nav><ul class="pagination justify-content-center">';
     if ($page > 1) {
-        echo '<li class="page-item"><a class="page-link" href="index.php?page=products&p=' . ($page - 1) . '">Previous</a></li>';
+        echo '<li class="page-item"><a class="page-link rounded-pill" href="index.php?page=products&p=' . ($page - 1) . '">Previous</a></li>';
     }
     for ($i = 1; $i <= $total_pages; $i++) {
-        echo '<li class="page-item' . ($i == $page ? ' active' : '') . '"><a class="page-link" href="index.php?page=products&p=' . $i . '">' . $i . '</a></li>';
+        echo '<li class="page-item' . ($i == $page ? ' active' : '') . '"><a class="page-link rounded-3" href="index.php?page=products&p=' . $i . '">' . $i . '</a></li>';
     }
     if ($page < $total_pages) {
-        echo '<li class="page-item"><a class="page-link" href="index.php?page=products&p=' . ($page + 1) . '">Next</a></li>';
+        echo '<li class="page-item"><a class="page-link rounded-pill" href="index.php?page=products&p=' . ($page + 1) . '">Next</a></li>';
     }
     echo '</ul></nav>';
     echo '</div>';

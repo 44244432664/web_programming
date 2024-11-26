@@ -52,20 +52,35 @@ body {
     border-color: #00A281 !important;
 }
 
-
 .page-link {
-    color: #00A281 !important;
+    color: #d9e1df !important;
+    background-color: transparent !important;
+    border-color: #00C09A !important;
 }
 
-.page-item.active .page-item {
-    z-index: 3;
-    color: #fff !important;
-    background-color: #00A281 !important;
-    border-color: #00A281 !important;
+.page-link:hover {
+    color: #d9e1df !important;
+    background-color: #00A080 !important;
+    border-color: #00C09A !important;
+}
+
+.page-item {
+    margin: 0.1rem
 }
 
 #map {
     height: 400px;   /* Height of the map */
     width: 600px;    /* Width of the map, creating a rectangular shape */
     margin: 0 auto;  /* Center the map on the page */
+}
+
+#livesearch_result {
+    display: none;
+    background-color: #00A080;
+    color: #00A281;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1;
+    border: 1px solid #d3d3d3 !important;
 }
